@@ -1,0 +1,20 @@
+.skeleton-card {
+  @apply h-72 w-full rounded-lg overflow-hidden relative;
+  background: linear-gradient(
+    to right,
+    #f8fafc 8%,   /* slate-50 */
+    #e2e8f0 18%,  /* slate-200 */
+    #f8fafc 33%   /* slate-50 */
+  );
+  background-size: 800px 104px;
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -800px 0;
+  }
+  100% {
+    background-position: 800px 0;
+  }
+}

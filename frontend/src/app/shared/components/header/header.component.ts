@@ -17,9 +17,10 @@ export class HeaderComponent {
   logo!: string
 
   itemsMenu: IMenu[] = [
-    {path: 'about', text: 'About'},
-    {path: 'projects', text: 'Projects'},
-    {path: 'blog', text: 'Blog'}
+    {path: 'modulo', text: 'Modulo'},
+    {path: 'images', text: 'Imagenes'},
+    {path: 'graphics', text: 'Graficas'},
+    {path: 'about', text: 'Conoceme'},
   ]
 
   constructor(private themeService: ThemeService) {}

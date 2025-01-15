@@ -32,6 +32,12 @@ export interface IRangeDate {
 }
 
 export interface IStats {
-  hour: String,
+  hour: string,
   count: number
+}
+
+export interface ICertifications {
+  text: string,
+  image: string,
+  pdf: string,
 }

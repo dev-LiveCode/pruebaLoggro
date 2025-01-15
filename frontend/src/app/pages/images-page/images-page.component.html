@@ -1,1 +1,33 @@
-<p>images-page works!</p>
+<!-- <div class="grid grid-cols-4 gap-4 py-10">
+    @for (item of images; track $index) {
+        <app-card-image [image]="item"></app-card-image>
+    }
+</div> -->
+
+<div class="grid grid-cols-4 gap-4 py-10">
+    <!-- Mostrar Skeletons mientras se cargan las imágenes -->
+    <ng-container *ngIf="loading; else imageGrid">
+      <div *ngFor="let _ of [1, 2, 3, 4, 5, 6, 7, 8]" class="skeleton-card"></div>
+    </ng-container>
+  
+    <ng-template #imageGrid>
+      <ng-container *ngFor="let item of displayedImages; let i = index">
+        <app-card-image
+          [image]="item"
+          [class.bg-gradient-to-b]="i >= displayedImages.length - 4"
+          [class.from-transparent]="i >= displayedImages.length - 4"
+          [class.to-slate-50]="i >= displayedImages.length - 4"
+        ></app-card-image>
+      </ng-container>
+    </ng-template>
+  </div>
+  
+  <!-- Botón para cargar más imágenes -->
+  <div class="text-center my-6" *ngIf="displayedImages.length < images.length">
+    <button
+      (click)="loadMoreImages()"
+      class="px-4 py-2 text-white bg-indigo-400 hover:bg-blue-500 rounded-md transition-colors duration-100"
+    >
+      Cargar más
+    </button>
+  </div>
