@@ -10,9 +10,29 @@ const imageSchema = Joi.object({
     requestDate: Joi.date().optional().messages({
         'date.base': 'La fecha de solicitud debe ser una fecha válida.',
     }),
-    file: Joi.any().required().messages({
-        'any.required': 'El archivo de imagen es obligatorio.',
-    }),
+    files: Joi.array()
+        .items(
+            Joi.object({
+                mimetype: Joi.string()
+                    .valid('image/jpeg', 'image/jpg', 'image/png')
+                    .required()
+                    .messages({
+                        'any.only': 'Solo se permiten archivos .jpeg, .jpg y .png.',
+                        'any.required': 'El tipo MIME del archivo es obligatorio.',
+                    }),
+                size: Joi.number()
+                    .max(20 * 1024 * 1024)
+                    .messages({
+                        'number.max': 'El archivo no puede exceder los 15 MB.',
+                    }),
+            })
+        )
+        .min(1)
+        .required()
+        .messages({
+            'array.min': 'Debes cargar al menos una imagen.',
+            'any.required': 'El campo "Archivos" es obligatorio.',
+        }),
 });
 
 export default imageSchema;

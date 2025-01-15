@@ -1,0 +1,103 @@
+<!-- Footer content -->
+<footer
+  class="relative w-screen bg-[#f7f7f7] dark:bg-darkConfig-900 text-slate-700 dark:text-white py-5 bottom-0"
+>
+  <div class="container mx-auto px-6">
+    <!-- <hr class="my-14"> -->
+
+    <!-- Footer Bottom Text -->
+    <div class="container">
+      <div
+        class="grid gap-10 md:grid-cols-3 justify-center items-center text-center"
+      >
+        <!-- Logo -->
+        <div class="flex justify-center">
+          <a href="https://www.livecodespace.com" target="_blank">
+            <img
+              [src]="logo"
+              class="w-52 hover:scale-125 transition ease-in-out hover:-translate-y-1 cursor-pointer"
+            />
+          </a>
+        </div>
+
+        <!-- Contact us -->
+        <div>
+          <h3 class="text-xl font-medium mb-9">Contact Us</h3>
+          <h4
+            class="text-offwhite text-md font-normal mb-6 hover:scale-125 transition ease-in-out hover:-translate-y-1 hover:text-indigo-400 cursor-pointer"
+          >
+            <i class="fa-solid fa-envelope text-xl mr-1"></i>
+            {{ "vslivecode@gmail.com" }}
+          </h4>
+          <h4
+            class="text-offwhite text-md font-normal mb-6 hover:scale-125 transition ease-in-out hover:-translate-y-1 hover:text-indigo-400 cursor-pointer"
+          >
+            <a
+              href="https://wa.me/573244589511?text=¡Hola!%20Estoy%20interesado%20en%20tus%20servicios"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fa-brands fa-whatsapp text-xl mr-1"></i>
+              (+57) 324 4589511
+            </a>
+          </h4>
+          <h4
+            class="text-offwhite text-md font-normal mb-6 hover:scale-125 transition ease-in-out hover:-translate-y-1 hover:text-indigo-400 cursor-pointer"
+          >
+            <a href="https://www.linkedin.com/in/livecode2024/" target="_blank">
+              <i class="fa-brands fa-linkedin text-xl mr-1"></i>
+              Live Code
+            </a>
+          </h4>
+          <h4
+            class="text-offwhite text-md font-normal mb-6 hover:scale-125 transition ease-in-out hover:-translate-y-1 hover:text-indigo-400 cursor-pointer"
+          >
+            <a href="https://github.com/dev-LiveCode" target="_blank">
+              <i class="fa-brands fa-github text-xl mr-1"></i>
+              dev-LiveCode
+            </a>
+          </h4>
+        </div>
+
+        <!-- Powered by -->
+        <div>
+          <h3 class="text-xl font-medium mb-9">Powered by</h3>
+
+          <div class="w-full flex justify-center items-center">
+            <a href="https://tailwindcss.com/" target="_blank" class="mr-4">
+              <img
+                src="./assets/img/faviconTailwind.ico"
+                class="hover:scale-125 transition ease-in-out hover:-translate-y-1 cursor-pointer duration-300"
+              />
+            </a>
+            <a href="https://angular.dev/" target="_blank" class="mr-4">
+              <img
+                src="./assets/img/faviconAngular.ico"
+                class="hover:scale-125 transition ease-in-out hover:-translate-y-1 cursor-pointer duration-300"
+              />
+            </a>
+            <a href="https://aws.amazon.com/es/" target="_blank" class="mr-4">
+              <img
+                [src]="
+                  isDark ? './assets/img/awsDark.svg' : './assets/img/aws.svg'
+                "
+                class="hover:scale-125 w-[60px] transition ease-in-out hover:-translate-y-1 cursor-pointer duration-300"
+              />
+            </a>
+            <a href="https://nodejs.org/en" target="_blank">
+              <img
+                [src]="
+                  isDark ? './assets/img/nodeDark.svg' : './assets/img/node.svg'
+                "
+                class="hover:scale-125 w-[80px] transition ease-in-out hover:-translate-y-1 cursor-pointer duration-300"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-10">
+        <h3 class="text-2xl font-bold">Let's build from here!</h3>
+      </div>
+    </div>
+  </div>
+</footer>

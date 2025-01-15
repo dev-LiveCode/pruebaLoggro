@@ -52,37 +52,49 @@ export const getImageById = async (req, res) => {
 export const uploadImage = async (req, res) => {
     try {
         const { personName, requestDate } = req.body;
-        const file = req.file; // Asegúrate de usar multer para manejar el archivo
+        const files = req.files; // Asegúrate de usar multer para manejar el archivo
+
+        if (!files || files.length === 0) {
+            return res.status(400).json({
+                message: 'No se cargaron archivos',
+            });
+        }
+        const uploadedImages = [];
+
+        for (const file of files) {
 
         // Generar un nombre único para la imagen en S3
-        const uniqueFileName = `${uuidv4()}-${Date.now()}.png`;
+            const uniqueFileName = `${uuidv4()}-${Date.now()}.png`;
 
-        // Configuración para subir a S3
-        const params = {
-            Bucket: env().AWS_S3_BUCKET, // Nombre del bucket
-            Key: uniqueFileName, // Nombre del archivo en S3
-            Body: file.buffer, // Archivo en formato buffer (requerido por S3)
-            ContentType: file.mimetype, // Tipo MIME del archivo
-            ACL: 'public-read', // Acceso público (ajusta según necesidades)
-        };
+            // Configuración para subir a S3
+            const params = {
+                Bucket: env().AWS_S3_BUCKET, // Nombre del bucket
+                Key: uniqueFileName, // Nombre del archivo en S3
+                Body: file.buffer, // Archivo en formato buffer (requerido por S3)
+                ContentType: file.mimetype, // Tipo MIME del archivo
+                ACL: 'public-read', // Acceso público (ajusta según necesidades)
+            };
 
-        // Subir archivo a S3
-        const uploadResult = await s3.upload(params).promise();
+            // Subir archivo a S3
+            const uploadResult = await s3.upload(params).promise();
 
-        // Guardar en MongoDB
-        const { size } = file;
-        const url = uploadResult.Location; // URL pública de la imagen
-        const newImage = new Image({ size, url, personName, requestDate: requestDate || Date.now() });
-        const savedImage = await newImage.save();
+            // Guardar en MongoDB
+            const { size } = file;
+            const url = uploadResult.Location; // URL pública de la imagen
+            const newImage = new Image({ size, url, personName, requestDate: requestDate || Date.now() });
+            const savedImage = await newImage.save();
+
+            uploadedImages.push(savedImage);
+        }
 
         res.status(201).json({
-            message: 'Success on process and upload image',
-            data: savedImage,
+            message: 'Success on process and upload images',
+            data: uploadedImages,
         });
     } catch (error) {
         console.error(error)
         res.status(500).json({
-            message: `Error on upload image`,
+            message: `Error on upload images`,
             error: error.message
         })
     }
@@ -132,7 +144,7 @@ export const getImagesByDateRange = async (req, res) => {
     }
 }
 
-export const getImagesByHour = async (req, res) => {
+export const getAverageByHour = async (req, res) => {
     try {
         const { startDate, endDate } = req.query;
 

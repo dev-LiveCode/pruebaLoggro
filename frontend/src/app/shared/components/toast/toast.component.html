@@ -1,0 +1,30 @@
+<div
+  *ngIf="toast"
+  @toastAnimation
+  class="fixed top-[15%] right-5 max-w-xs px-4 py-2 rounded-lg shadow-lg text-white flex items-center gap-2 z-50"
+  [ngClass]="{
+    'bg-green-400': toast.type === 'success',
+    'bg-red-500': toast.type === 'error',
+    'bg-blue-500': toast.type === 'info',
+    'bg-yellow-500': toast.type === 'warning'
+  }"
+>
+  <!-- Icon -->
+  <div>
+    @switch (toast.type) {
+        @case('success'){
+            <i class="fa-regular fa-paper-plane"></i>
+        }
+        @case('error'){
+            <i class="fa-regular fa-circle-xmark"></i>
+        }
+        @case('warning'){
+            <i class="fa-solid fa-triangle-exclamation"></i>
+        }
+    }
+    
+  </div>
+
+  <!-- Message -->
+  <div>{{ toast.message }}</div>
+</div>

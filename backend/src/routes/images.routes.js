@@ -9,7 +9,7 @@ import { validateDateRange } from "../helpers/utils.middlewares.js";
 import imageSchema from '../schemas/image.schema.js';
 
 // imports functions from controllers
-import { getAllImages, getImageById, uploadImage, getImagesByDateRange, getImagesByHour } from "../controllers/images.controller.js";
+import { getAllImages, getImageById, uploadImage, getImagesByDateRange, getAverageByHour } from "../controllers/images.controller.js";
 
 const router = Router();
 
@@ -24,13 +24,13 @@ router.get('/', getAllImages)
 router.get('/range', validateDateRange, getImagesByDateRange)
 
 // Get average and stats images by hour
-router.get('/hourly', validateDateRange, getImagesByHour)
+router.get('/hourly', validateDateRange, getAverageByHour)
 
 // Get one image
 router.get('/id/:id', getImageById)
 
 // Upload image
-router.post('/', upload.single('file'), validate(imageSchema), uploadImage)
+router.post('/', upload.array('files', 4), validate(imageSchema), uploadImage)
 
 
 
